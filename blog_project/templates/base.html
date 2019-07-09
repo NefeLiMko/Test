@@ -1,0 +1,16 @@
+{%load static%}
+<html>
+<head>
+	<title>Test Task Grid</title>
+	<link href="{% static 'css/base.css' %}" rel="stylesheet">
+</head>
+<body>
+	<header>
+		<h1><a href="{% url 'home'%}">Blog</a></h1>
+	</header>
+	<div>
+		{% block content%}
+		{% endblock content%}
+	</div>
+</body>
+</html>
