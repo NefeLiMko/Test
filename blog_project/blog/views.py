@@ -18,13 +18,13 @@ def BlogListView(request):
 def PostsInCategoryView(request,*args,**kwargs):
 	categories = Category.objects.all()
 	for cat in categories:
-		if str(cat.title) == str(kwargs['title']):
+		if str(cat.title) == str(kwargs.get('title','')):
 			category = cat
 	posts_to_view = []
 	posts = Post.objects.all()
 	template_name = 'category_detail.html'
 	for post in posts:
-		if str(post.category) == str(kwargs['title']):
+		if str(post.category) == str(kwargs.get('title','')):
 			posts_to_view.append(post)
 
 	return render(request,template_name,{
@@ -40,7 +40,7 @@ def BlogDetailView(request,*args,**kwargs):
 	categories = Category.objects.all()
 	posts = Post.objects.all()
 	for post in posts:
-		if str(post.id) == str(kwargs['pk']):
+		if str(post.id) == str(kwargs.get('pk','')):
 			pos = post
 			cryptoTitle = Crypto(str(pos.title))
 			cryptoBody = Crypto(str(pos.body))
