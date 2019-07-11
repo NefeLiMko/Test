@@ -6,7 +6,7 @@ import secrets
 
 
 # Create your models here.
-def Crypto(*args):
+def Crypto(*args):#Here we're making our string(title and body) cryptographic 
 	stringSource = args
 	password = secrets.choice(string.ascii_lowercase)
 	password += secrets.choice(string.ascii_uppercase)
@@ -19,7 +19,7 @@ def Crypto(*args):
 	password = ''.join(char_list)
 	return password
 
-class Category(models.Model):
+class Category(models.Model):#This is our model of Category of Posts 
 	title = models.CharField(max_length=255, verbose_name="Title")
 
 	def __str__(self):
@@ -29,7 +29,7 @@ class Category(models.Model):
 		return reverse('category_detail', args=[str(self.title)])
 
 
-class Post(models.Model):
+class Post(models.Model): # our Post
 	title = models.CharField(max_length=200)
 	category = models.ForeignKey(Category, verbose_name='category', on_delete=models.CASCADE)
 	password = models.CharField(max_length=50)

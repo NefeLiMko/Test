@@ -45,17 +45,17 @@ def BlogDetailView(request,*args,**kwargs):
 			cryptoTitle = Crypto(str(pos.title))
 			cryptoBody = Crypto(str(pos.body))
 	template_name = 'post_detail.html'
-	res = False
+	isValid = False
 	if request.method == "GET":
-		got = request.GET.get('password')
-		if got == pos.password:
-			res = True
+		passGot = request.GET.get('password')
+		if passGot == pos.password:
+			isValid = True
 	return render(request,template_name,{
 		'posts':posts,
 		'post':pos,
 		'categories':categories,
 		'form':form,
-		'got':res,
+		'isValid':isValid,
 		'cryptoTitle':cryptoTitle,
 		'cryptoBody':cryptoBody,
 		})
