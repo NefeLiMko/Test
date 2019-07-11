@@ -14,10 +14,11 @@ $ git clone git@github.com:Nefelimko/test.git
 
 # Usage
 You can use the example of blog simply, just to do below:
-$ cd my_blog_tutorial
-$ pip install -r requirements.txt 
-$ python manage.py migrate
-$ python manage.py runserver
+
+ $ cd my_blog_tutorial
+ $ pip install -r requirements.txt 
+ $ python manage.py migrate
+ $ python manage.py runserver
 
 open the website and input
 http://127.0.0.1:8000/
