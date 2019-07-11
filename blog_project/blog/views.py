@@ -14,9 +14,43 @@ def BlogListView(request):
 		'posts':posts,	
 		})
 
-class BlogDetailView(DetailView):
-	model = Post
+def PostsInCategoryView(request,*args,**kwargs):
+	categories = Category.objects.all()
+	for cat in categories:
+		if str(cat.title) == str(kwargs['title']):
+			category = cat
+	posts_to_view = []
+	posts = Post.objects.all()
+	template_name = 'category_detail.html'
+	for post in posts:
+		if str(post.category) == str(kwargs['title']):
+			posts_to_view.append(post)
+
+	return render(request,template_name,{
+		'posts':posts_to_view,
+		'pos':posts,
+		'categor':category,
+		'categories':categories,
+		})
+
+"""class PostsInCategoryView(DetailView):
+	model = Category
+	template_name = 'category_detail.html'
+"""
+
+def BlogDetailView(request,*args,**kwargs):
+	categories = Category.objects.all()
+	posts = Post.objects.all()
+	print(kwargs)
+	for post in posts:
+		if str(post.id) == str(kwargs['pk']):
+			pos = post
 	template_name = 'post_detail.html'
+	return render(request,template_name,{
+		'posts':posts,
+		'post':pos,
+		'categories':categories,
+		})
 
 class BlogCreateView(CreateView):
 	model = Post

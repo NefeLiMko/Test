@@ -1,11 +1,40 @@
 {%extends 'base.html' %}
 
 {%block content%}
+	<div class="row no-gutters">
+	<div class="col-lg-3">
+	{%for category in categories%}
+		{%if post.category == category%}
+		<div class="cat-this">
+			<h3><a href="{% url 'category_detail' category.title %}">{{category.title}}</a></h3>
+		</div>{%else%}
+		<div class="cat-title">
+			<h3><a href="{% url 'category_detail' category.title %}">{{category.title}}</a></h3>
+		</div>
+		{%endif%}
+	{%endfor%}
+	</div>
+	<div class="col-lg-3">
+	{%for el in posts%}
+		{%if el.category == post.category%}
+		{%if el.id == post.id%}
+			<div class="post-this">
+				<h3><a href="{% url 'post_detail' el.pk %}">{{el.title}}</a></h3>
+			</div>
+		{%else%}
+		<div class="post-title">
+			<h3><a href="{% url 'post_detail' el.pk %}">{{el.title}}</a></h3>
+		</div>
+		{%endif%}
+		{%endif%}
+	{%endfor%}
+	</div>
+	<div class="col-lg-6">
 	<div class="post-entry">
 		<h2>{{post.title}}</h2>
 		<p> {{post.body}}</p>
 		<p> {{post.category}}</p>
 	</div>
-	<a href="{% url 'post_edit' post.pk %}">+ Edit Blog Post</a>
-	<p><a href="{% url 'post_delete' post.pk %}">+ Delete Blog Post</a></p>
+	</div>
+</div>
 {%endblock content%}
