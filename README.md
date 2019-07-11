@@ -2,8 +2,8 @@
 Django blog as test task
 
 # Requirements
-⋅⋅* Python 3.6.7
-⋅⋅* django 2.1
+* Python 3.6.7
+* django 2.1
 
 # Install
 $ git clone https://github.com/Nefelimko/test
