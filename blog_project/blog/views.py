@@ -2,7 +2,8 @@ from django.shortcuts import render
 from django.views.generic import ListView, DetailView,UpdateView,DeleteView
 from django.views.generic.edit import CreateView
 from django.urls import reverse_lazy
-from .models import Category, Post
+from .models import Category, Post, Crypto
+from .forms import PostForm, ValidForm
 # Create your views
 
 def BlogListView(request):
@@ -33,29 +34,36 @@ def PostsInCategoryView(request,*args,**kwargs):
 		'categories':categories,
 		})
 
-"""class PostsInCategoryView(DetailView):
-	model = Category
-	template_name = 'category_detail.html'
-"""
 
 def BlogDetailView(request,*args,**kwargs):
+	form = ValidForm()
 	categories = Category.objects.all()
 	posts = Post.objects.all()
-	print(kwargs)
 	for post in posts:
 		if str(post.id) == str(kwargs['pk']):
 			pos = post
+			cryptoTitle = Crypto(str(pos.title))
+			cryptoBody = Crypto(str(pos.body))
 	template_name = 'post_detail.html'
+	res = False
+	if request.method == "GET":
+		got = request.GET.get('password')
+		if got == pos.password:
+			res = True
 	return render(request,template_name,{
 		'posts':posts,
 		'post':pos,
 		'categories':categories,
+		'form':form,
+		'got':res,
+		'cryptoTitle':cryptoTitle,
+		'cryptoBody':cryptoBody,
 		})
 
 class BlogCreateView(CreateView):
 	model = Post
 	template_name = 'post_new.html'
-	fields = ['title','category', 'author', 'body']	
+	fields = ['title', 'category', 'body' , 'password']
 
 class BlogUpdateView(UpdateView):
 	model =Post

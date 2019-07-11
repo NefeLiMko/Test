@@ -31,10 +31,30 @@
 	</div>
 	<div class="col-lg-6">
 	<div class="post-entry">
+				<form action="" method="GET" class="post-form">{%csrf_token%}
+			<div class="row">
+			<div class="col-lg-6">{{form.as_p}}</div>
+			<div class="col-lg-4" style=""><input type="submit" value="submit"  /></div>
+			{% if user.is_authenticated %}
+			<div class="col-lg-2"><a href="{%url 'post_edit' post.pk%}">Edit</a>	</div>
+			{%endif%}
+		</div>
+		</form>
+	
+
+		{%if got == False%}
+		<h2>{{cryptoTitle}}</h2>
+		<span> {{cryptoBody}}</span>
+
+		{%else%} 
 		<h2>{{post.title}}</h2>
-		<p> {{post.body}}</p>
-		<p> {{post.category}}</p>
+		<h4> {{post.body}}</h4>
+		{%endif%}
+
+
 	</div>
+
+
 	</div>
 </div>
 {%endblock content%}
