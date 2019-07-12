@@ -22,8 +22,8 @@ You can use the example of blog simply, just to do below:
 
 ```
 $ cd test
-$ cd blog_project
 $ pip install -r requirements.txt  
+$ cd blog_project
 $ python manage.py migrate
 $ python manage.py runserver
 
